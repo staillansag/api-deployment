@@ -16,35 +16,39 @@
                 "templateKey": "method",
                 "values": [.routing.method]
             },
-            {
-                "templateKey": "sslConfig",
-                "parameters": [
-                    (if .routing.keyStoreAlias? then
-                        {
-                            "templateKey": "keyStoreAlias",
-                            "values": [.routing.keyStoreAlias]
-                        }
-                    else
-                        empty
-                    end),
-                    (if .routing.keyAlias? then
-                        {
-                            "templateKey": "keyAlias",
-                            "values": [.routing.keyAlias]
-                        }
-                    else
-                        empty
-                    end),
-                    (if .routing.truststoreAlias? then
-                        {
-                            "templateKey": "truststoreAlias",
-                            "values": [.routing.truststoreAlias]
-                        }
-                    else
-                        empty
-                    end)
-                ]
-            },
+            (if .routing.keyStoreAlias? or .routing.keyAlias? or .routing.truststoreAlias? then
+                {
+                    "templateKey": "sslConfig",
+                    "parameters": [
+                        (if .routing.keyStoreAlias? then
+                            {
+                                "templateKey": "keyStoreAlias",
+                                "values": [.routing.keyStoreAlias]
+                            }
+                        else
+                            empty
+                        end),
+                        (if .routing.keyAlias? then
+                            {
+                                "templateKey": "keyAlias",
+                                "values": [.routing.keyAlias]
+                            }
+                        else
+                            empty
+                        end),
+                        (if .routing.truststoreAlias? then
+                            {
+                                "templateKey": "truststoreAlias",
+                                "values": [.routing.truststoreAlias]
+                            }
+                        else
+                            empty
+                        end)
+                    ]
+                }
+            else
+                empty
+            end),
             (if .routing.connectTimeout? then
                 {
                     "templateKey": "connectTimeout",
