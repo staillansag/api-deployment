@@ -8,30 +8,49 @@ pool:
 variables:
   - group: apim-variables
 
-steps:
+jobs:
 
-- script: chmod u+x ./scripts/*.sh
-  displayName: 'Grant shell execution permissions'
+- job: DeployAPI
 
-- script: ./scripts/01_CheckManifest.sh
-  displayName: 'Check manifest.json file'
+  steps:
 
-- script: ./scripts/11_CreateAPIDefinition.sh
-  displayName: 'Create API definition'
-  env:
-    APIGW_PASSWORD: $(APIGW_PASSWORD)
+  - script: chmod u+x ./scripts/*.sh
+    displayName: 'Grant shell execution permissions'
 
-- script: ./scripts/14_UpdateAPIMetadata.sh
-  displayName: 'Update API metadata'
-  env:
-    APIGW_PASSWORD: $(APIGW_PASSWORD)
+  - script: ./scripts/01_CheckManifest.sh
+    displayName: 'Check manifest.json file'
 
-- script: ./scripts/20_ManageEnforcements.sh
-  displayName: 'Update API policy enforcements'
-  env:
-    APIGW_PASSWORD: $(APIGW_PASSWORD)
+  - script: ./scripts/11_CreateAPIDefinition.sh
+    displayName: 'Create API definition'
+    env:
+      APIGW_PASSWORD: $(APIGW_PASSWORD)
 
-- script: ./scripts/30_ActivateAPI.sh
-  displayName: 'Activate API'
-  env:
-    APIGW_PASSWORD: $(APIGW_PASSWORD)
+  - script: ./scripts/14_UpdateAPIMetadata.sh
+    displayName: 'Update API metadata'
+    env:
+      APIGW_PASSWORD: $(APIGW_PASSWORD)
+
+  - script: ./scripts/20_ManageEnforcements.sh
+    displayName: 'Update API policy enforcements'
+    env:
+      APIGW_PASSWORD: $(APIGW_PASSWORD)
+
+  - script: ./scripts/30_ActivateAPI.sh
+    displayName: 'Activate API'
+    env:
+      APIGW_PASSWORD: $(APIGW_PASSWORD)
+
+- job: RollbackAPIDeployment
+  dependsOn: DeployAPI
+  condition: |
+    eq(dependencies.DeployAPI.result, 'Failed')
+
+  steps:
+
+  - script: chmod u+x ./scripts/*.sh
+    displayName: 'Grant shell execution permissions'
+
+  - script: ./scripts/99_DeleteAPI.sh
+    displayName: 'Delete API'
+    env:
+      APIGW_PASSWORD: $(APIGW_PASSWORD)
