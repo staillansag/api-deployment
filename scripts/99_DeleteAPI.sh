@@ -16,5 +16,6 @@ ERROR_DETAILS=$(echo $RESPONSE | jq -r '.errorDetails')
 
 if [ "$ERROR_DETAILS" != "null" ] ; then
     echo "--- API deletion failed: $ERROR_DETAILS"
+    echo $RESPONSE
     exit 1
 fi
