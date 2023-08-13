@@ -30,5 +30,55 @@ else
     echo "##vso[task.setvariable variable=API_POLICY_ID;]${API_POLICY_ID}"
 fi
 
+# We look for the ID of the team having name = metadata.team
+
+json=$(jq -f ./templates/searchteam.jq manifest.json)
+
+RESPONSE=$(curl -s --location --request POST "${APIGW_URL}/search" \
+-u ${APIGW_USERNAME}:${APIGW_PASSWORD} \
+--header 'accept: application/json' \
+--header 'Content-Type: application/json' \
+--data-raw "${json}")
+
+ERROR_DETAILS=$(echo "$RESPONSE" | jq -r '.errorDetails')
+TEAM_ID=$(echo "$RESPONSE" | jq -r '.accessprofiles[0].id')
+
+if [ "$ERROR_DETAILS" != "null" ] ; then
+    echo "--- Team search failed: $ERROR_DETAILS"
+    exit 1
+fi
+
+if [ "$TEAM_ID" == "null" ] ; then
+    echo "--- Team not found"
+    exit 1
+fi
+
+# Then we update the team of the newly created API
+
+json=$(jq -n --arg api_id "$API_ID" --arg team_id "$TEAM_ID" '{
+    "assetType": "API",
+    "assetIds": [
+        $api_id
+    ],
+    "newTeams": [
+        "Administrators",
+        $team_id
+    ]
+}')
+
+RESPONSE=$(curl -s --location --request POST "${APIGW_URL}/assets/team" \
+-u ${APIGW_USERNAME}:${APIGW_PASSWORD} \
+--header 'accept: application/json' \
+--header 'Content-Type: application/json' \
+--data-raw "${json}" )
+
+ERROR_DETAILS=$(echo $RESPONSE | jq -r '.errorDetails')
+
+if [ "$ERROR_DETAILS" != "null" ] ; then
+    echo "--- API creation failed: $ERROR_DETAILS"
+    exit 1
+fi
+
 echo "API_ID            = ${API_ID}"
 echo "API_POLICY_ID     = ${API_POLICY_ID}"
+echo "TEAM_ID           = ${TEAM_ID}"

@@ -16,8 +16,13 @@ API_VERSION=$(jq -r '.metadata.version' manifest.json)
 if [ "$SPEC_TYPE" == "null" ] ; then
     echo "metadata.specificationType missing"
     exit 1
-else   
-    echo "##vso[task.setvariable variable=SPEC_TYPE;]${SPEC_TYPE}"
+else  
+    if [[ "$SPEC_TYPE" != "openapi" && "$SPEC_TYPE" != "swagger" && "$SPEC_TYPE" != "raml" ]]; then
+        echo "metadata.specificationType must be one of: openapi, swagger, raml"
+        exit 1
+    else
+        echo "##vso[task.setvariable variable=SPEC_TYPE;]${SPEC_TYPE}"
+    fi
 fi
 
 if [ "$API_SPEC_FILE" == "null" ] ; then
@@ -53,6 +58,16 @@ if [ "$array_length" -eq 0 ]; then
     echo "transport information missing"
     exit 1
 fi
+
+valid_transports=("http" "https")
+transport_values=$(jq -r '.transport[]' manifest.json)
+
+for value in $transport_values; do
+    if [[ ! " ${valid_transports[@]} " =~ " ${value} " ]]; then
+        echo "transport $value is invalid"
+        exit 1
+    fi
+done
 
 ROUTING=$(jq -r '.routing' manifest.json)
 if [ "$ROUTING" == "null" ] ; then
