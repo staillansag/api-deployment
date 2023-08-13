@@ -30,3 +30,8 @@ steps:
   displayName: 'Update API policy enforcements'
   env:
     APIGW_PASSWORD: $(APIGW_PASSWORD)
+
+- script: ./scripts/30_ActivateAPI.sh
+  displayName: 'Activate API'
+  env:
+    APIGW_PASSWORD: $(APIGW_PASSWORD)
