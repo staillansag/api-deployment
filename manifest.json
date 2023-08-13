@@ -69,12 +69,6 @@
         "consumers": ["AllConsumers"]
     },
     "caching": {
-        "ttl": "5m",
-        "cacheCriteria": []
-    },
-    "responseValidation": {
-        "validatePayload": "true",
-        "validateHeaders": "false",
-        "validateContentType": "true"
+        "ttl": "5m"
     }
 }
