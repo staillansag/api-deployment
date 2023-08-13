@@ -19,41 +19,40 @@
       },
       {
         "templateKey": "requestTransformationConfiguration",
-        "parameters": 
-        .requestTransformations[0].requestTransformationConfigurations | map(
-          if .type == "addOrModify" then
-            {
-              "templateKey": "commonTransformation",
-              "parameters": [
-                {
-                  "templateKey": "addOrModify",
-                  "parameters": [
-                    {
-                      "templateKey": "transformationVariable",
-                      "values": [.target]
-                    },
-                    {
-                      "templateKey": "transformationValue",
-                      "values": [.value]
-                    }
-                  ]
-                }
-              ]
-            }
-          elif .type == "remove" then
-            {
-              "templateKey": "commonTransformation",
-              "parameters": [
-                {
-                  "templateKey": "remove",
-                  "values": [.target]
-                }
-              ]
-            }
-          else
-            .
-          end
-        )
+        "parameters": [
+          {
+            "templateKey": "commonTransformation",
+            "parameters": 
+            .requestTransformations[0].requestTransformationConfigurations | reduce .[] as $item ([]; 
+              if $item.type == "addOrModify" then
+                . + [
+                  {
+                    "templateKey": "addOrModify",
+                    "parameters": [
+                      {
+                        "templateKey": "transformationVariable",
+                        "values": [$item.target]
+                      },
+                      {
+                        "templateKey": "transformationValue",
+                        "values": [$item.value]
+                      }
+                    ]
+                  }
+                ]
+              elif $item.type == "remove" then
+                . + [
+                  {
+                    "templateKey": "remove",
+                    "values": [$item.target]
+                  }
+                ]
+              else
+                .
+              end
+            )
+          }
+        ]
       }
     ],
     "active": false

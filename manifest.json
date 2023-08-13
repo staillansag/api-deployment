@@ -12,7 +12,6 @@
         "scope": "OneAccountAuthorizationServer:pocapis"
     },
     "transport": [
-        "http",
         "https"
     ],
     "iam": {
@@ -21,7 +20,7 @@
         "conditions": [
             {
                 "type": "httpsCertificate",
-                "applicationLookup": "open"
+                "applicationLookup": "strict"
             },
             {
                 "type": "oAuth2Token",
@@ -70,7 +69,8 @@
         "consumers": ["AllConsumers"]
     },
     "caching": {
-        "ttl": "5m"
+        "ttl": "5m",
+        "cacheCriteria": []
     },
     "responseValidation": {
         "validatePayload": "true",
