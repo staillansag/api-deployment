@@ -2,7 +2,6 @@
 
 echo "APIGW_URL         = ${APIGW_URL}"
 echo "APIGW_USERNAME    = ${APIGW_USERNAME}"
-echo "APIGW_PASSWORD    = ${APIGW_PASSWORD}"
 echo "SPEC_TYPE         = ${SPEC_TYPE}"
 echo "API_SPEC_FILE     = ${API_SPEC_FILE}"
 echo "API_NAME          = ${API_NAME}"
@@ -29,8 +28,11 @@ else
 
     # We also store the ID of the default policy attached to this API
     API_POLICY_ID=$(echo $RESPONSE | jq -r '.apiResponse.api.policies[0]')
-    echo "##vso[task.setvariable variable=POLICY_ID;]${API_POLICY_ID}"
+    echo "##vso[task.setvariable variable=API_POLICY_ID;]${API_POLICY_ID}"
 fi
+
+echo "API_ID            = ${API_ID}"
+echo "API_POLICY_ID     = ${API_POLICY_ID}"
 
 
 # json=$(jq -f ./templates/searchteam.jq manifest.json)
