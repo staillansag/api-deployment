@@ -14,51 +14,48 @@
             },
             {
                 templateKey: "max-payload-size",
-                values: if .caching.maximumPayloadSize == null then [] else [.caching.maximumPayloadSize] end
-            },
-            if .caching.cacheCriteria and (.caching.cacheCriteria | length > 0) then
-            {
-                templateKey: "cacheCriteria",
-                parameters: [
-                    (.caching.cacheCriteria[] | 
-                        if .type == "header" then
-                            {
-                                templateKey: "httpHeader",
-                                parameters: [
-                                    {
-                                        templateKey: "httpHeaderName",
-                                        values: [.name]
-                                    },
-                                    {
-                                        templateKey: "whiteList",
-                                        values: .values
-                                    }
-                                ]
-                            }
-                        elif .type == "queryParameter" then
-                            {
-                                templateKey: "queryParam",
-                                parameters: [
-                                    {
-                                        templateKey: "queryParamName",
-                                        values: [.name]
-                                    },
-                                    {
-                                        templateKey: "whiteList",
-                                        values: .values
-                                    }
-                                ]
-                            }
-                        else
-                            empty
-                        end
-                    )
-                ]
+                values: [.caching.maximumPayloadSize // null]
             }
-            else
-                empty
-            end
-        ],
+        ] + (if .caching.cacheCriteria and (.caching.cacheCriteria | length > 0) then
+            [{
+                templateKey: "cacheCriteria",
+                parameters: .caching.cacheCriteria[] | (
+                    if .type == "header" then
+                        {
+                            templateKey: "httpHeader",
+                            parameters: [
+                                {
+                                    templateKey: "httpHeaderName",
+                                    values: [.name]
+                                },
+                                {
+                                    templateKey: "whiteList",
+                                    values: .values
+                                }
+                            ]
+                        }
+                    elif .type == "queryParameter" then
+                        {
+                            templateKey: "queryParam",
+                            parameters: [
+                                {
+                                    templateKey: "queryParamName",
+                                    values: [.name]
+                                },
+                                {
+                                    templateKey: "whiteList",
+                                    values: .values
+                                }
+                            ]
+                        }
+                    else
+                        empty
+                    end
+                )
+            }]
+        else
+            []
+        end),
         active: false
     }
 }
