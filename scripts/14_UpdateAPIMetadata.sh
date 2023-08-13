@@ -28,7 +28,6 @@ API_ID=$(echo $RESPONSE | jq -r '.apiResponse.api.id')
 if [ "$ERROR_DETAILS" != "null" ] ; then
     echo "--- API metadata update failed: $ERROR_DETAILS"
     echo $RESPONSE | jq
-    deleteAPI ${API_ID}
     exit 1
 fi
 
@@ -47,13 +46,11 @@ SCOPE_ID=$(echo "$RESPONSE" | jq -r '.gateway_scope[0].id')
 
 if [ "$ERROR_DETAILS" != "null" ] ; then
     echo "--- Oauth2 scope search failed: $ERROR_DETAILS"
-    deleteAPI ${API_ID}
     exit 1
 fi
 
 if [ "$SCOPE_ID" == "null" ] ; then
     echo "--- Oauth2 scope not found"
-    deleteAPI ${API_ID}
     exit 1
 fi
 
@@ -76,7 +73,6 @@ ERROR_DETAILS=$(echo "$RESPONSE" | jq -r '.errorDetails')
 
 if [ "$ERROR_DETAILS" != "null" ] ; then
     echo "--- Oauth2 scope update failed: $ERROR_DETAILS"
-    deleteAPI ${API_ID}
     exit 1
 fi
 
