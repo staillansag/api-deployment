@@ -39,7 +39,9 @@ createPolicyEnforcement() {
         --data-raw "${json}" | jq -r '.policyAction.id')
 
     if [[ -z "$policy_id" || "$policy_id" == "null" ]]; then
-        echo "Failed to obtain policy ID." >&2
+        echo "Failed to obtain policy enforcement ID." >&2
+        echo "Policy enforcement JSON:"
+        echo ${json}
         return 1
     fi
 

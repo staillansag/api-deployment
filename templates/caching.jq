@@ -14,8 +14,9 @@
             },
             {
                 templateKey: "max-payload-size",
-                values: [.caching.maximumPayloadSize]
+                values: if .caching.maximumPayloadSize == null then [] else [.caching.maximumPayloadSize] end
             },
+            if .caching.cacheCriteria and (.caching.cacheCriteria | length > 0) then
             {
                 templateKey: "cacheCriteria",
                 parameters: [
@@ -54,6 +55,9 @@
                     )
                 ]
             }
+            else
+                empty
+            end
         ],
         active: false
     }

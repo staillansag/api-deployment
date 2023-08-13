@@ -1,6 +1,5 @@
 {
     "policyAction": {
-        "id": "03733913-0040-4688-a3ca-1d1f34a87dd6",
         "names": [
             {
                 "value": "Straight Through Routing",
