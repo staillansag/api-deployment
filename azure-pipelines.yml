@@ -40,17 +40,8 @@ jobs:
     env:
       APIGW_PASSWORD: $(APIGW_PASSWORD)
 
-- job: RollbackAPIDeployment
-  dependsOn: DeployAPI
-  condition: |
-    eq(dependencies.DeployAPI.result, 'Failed')
-
-  steps:
-
-  - script: chmod u+x ./scripts/*.sh
-    displayName: 'Grant shell execution permissions'
-
   - script: ./scripts/99_DeleteAPI.sh
     displayName: 'Delete API'
     env:
       APIGW_PASSWORD: $(APIGW_PASSWORD)
+    condition: failed()
