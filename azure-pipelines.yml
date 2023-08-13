@@ -25,3 +25,8 @@ steps:
   displayName: 'Update API metadata'
   env:
     APIGW_PASSWORD: $(APIGW_PASSWORD)
+
+- script: ./scripts/20_ManageEnforcements.sh
+  displayName: 'Update API policy enforcements'
+  env:
+    APIGW_PASSWORD: $(APIGW_PASSWORD)
