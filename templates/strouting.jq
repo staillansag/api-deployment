@@ -19,28 +19,48 @@
             {
                 "templateKey": "sslConfig",
                 "parameters": [
-                    {
-                        "templateKey": "keyStoreAlias",
-                        "values": [.routing.keyStoreAlias]
-                    },
-                    {
-                        "templateKey": "keyAlias",
-                        "values": [.routing.keyAlias]
-                    },
-                    {
-                        "templateKey": "truststoreAlias",
-                        "values": [.routing.truststoreAlias]
-                    }
+                    (if .routing.keyStoreAlias? then
+                        {
+                            "templateKey": "keyStoreAlias",
+                            "values": [.routing.keyStoreAlias]
+                        }
+                    else
+                        empty
+                    end),
+                    (if .routing.keyAlias? then
+                        {
+                            "templateKey": "keyAlias",
+                            "values": [.routing.keyAlias]
+                        }
+                    else
+                        empty
+                    end),
+                    (if .routing.truststoreAlias? then
+                        {
+                            "templateKey": "truststoreAlias",
+                            "values": [.routing.truststoreAlias]
+                        }
+                    else
+                        empty
+                    end)
                 ]
             },
-            {
-                "templateKey": "connectTimeout",
-                "values": [.routing.connectTimeout]
-            },
-            {
-                "templateKey": "readTimeout",
-                "values": [.routing.readTimeout]
-            }
+            (if .routing.connectTimeout? then
+                {
+                    "templateKey": "connectTimeout",
+                    "values": [.routing.connectTimeout]
+                }
+            else
+                empty
+            end),
+            (if .routing.readTimeout? then
+                {
+                    "templateKey": "readTimeout",
+                    "values": [.routing.readTimeout]
+                }
+            else
+                empty
+            end)
         ],
         "active": false
     }
