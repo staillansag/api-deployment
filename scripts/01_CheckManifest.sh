@@ -1,5 +1,10 @@
 . ./scripts/00_Utils.sh
 
+if [[ ! -f "manifest.json" ]]; then
+    echo "The manifest.json file does not exist."
+    exit 1
+fi
+
 SPEC_TYPE=$(jq -r '.metadata.specificationType' manifest.json)
 API_SPEC_FILE=$(jq -r '.metadata.specificationFile' manifest.json)
 API_NAME=$(jq -r '.metadata.name' manifest.json)
@@ -38,13 +43,12 @@ if [ "$API_VERSION" == "null" ] ; then
     echo "metadata.version missing"
     exit 1
 else   
-    echo "##vso[task.setvariable variable=SPEC_TYPE;]${API_VERSION}"
+    echo "##vso[task.setvariable variable=API_VERSION;]${API_VERSION}"
 fi
 
 # Checking policies. We need at least a transport policy and a routing policy
 
-array_length=$(jq '.transport | length' Meta.json)
-echo "array_length = ${array_length}"
+array_length=$(jq '.transport | length' manifest.json)
 if [ "$array_length" -eq 0 ]; then
     echo "transport information missing"
     exit 1
