@@ -57,7 +57,7 @@
     },
     "backendAuthentication": {
         "authType": "ALIAS",
-        "alias": "customers-be-credentials"
+        "alias": "${customers-be-credentials}"
     },
     "throttling": {
         "limit": "10",
