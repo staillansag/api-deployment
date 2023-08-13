@@ -1,7 +1,7 @@
 {
     "metadata": {
         "specificationFile": "CustomersAPI.yaml",
-        "specificationType": "swagger",
+        "specificationType": "openapi",
         "name": "MyAPI",
         "version": "1.0",
         "description": "This is my API",

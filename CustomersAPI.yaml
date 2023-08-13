@@ -1,218 +1,375 @@
-swagger: '2.0'
+openapi: 3.0.1
 info:
+  title: CustomersAPIOAS
   description: Customer management API to showcase microservices implementation using the webMethods stack
   version: '2.0'
-  title: CustomersAPISwagger
-consumes:
-  - application/json
-produces:
-  - application/json
 paths:
   /customers/{customerId}:
+    summary: /customers/{customerId}
     get:
       description: Use this method to retrieve a customer given its id
       operationId: getCustomer
-      consumes: []
-      produces:
-        - application/json
       parameters:
         - name: customerId
           in: path
           description: id of the customer that is to be retrieved
           required: true
-          type: string
+          allowEmptyValue: false
+          schema:
+            type: string
+            description: id of the customer that is to be retrieved
+            readOnly: false
+            example: null
       responses:
         '200':
           description: OK
-          schema:
-            $ref: '#/definitions/getCustomerResponse'
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getCustomerResponse'
+              example: |-
+                {
+                  "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+                  "lastName": "Lyndon",
+                  "firstName": "James",
+                  "birthDate": "2001-10-01",
+                  "status": "ACTIVE"
+                }
+          links: {}
         '401':
           description: Access Denied
+          headers: {}
+          content: {}
+          links: {}
         '404':
           description: Not found
+          headers: {}
+          content: {}
+          links: {}
     put:
       description: Use this method to update a customer given its id
       operationId: putCustomer
-      consumes:
-        - application/json
-      produces:
-        - application/json
       parameters:
         - name: customerId
           in: path
           description: id of the customer that is to be updated
           required: true
-          type: string
-        - in: body
-          name: body
-          required: false
+          allowEmptyValue: false
           schema:
-            $ref: '#/definitions/CustomerCanonical'
+            type: string
+            description: id of the customer that is to be updated
+            readOnly: false
+            example: null
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerCanonical'
+            example: |-
+              {
+                "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+                "lastName": "Lyndon",
+                "firstName": "James",
+                "birthDate": "2001-10-01",
+                "status": "ACTIVE"
+              }
       responses:
         '200':
           description: OK
-          schema:
-            $ref: '#/definitions/putCustomerResponse'
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/putCustomerResponse'
+              example: |-
+                {
+                  "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+                  "lastName": "Lyndon",
+                  "firstName": "James",
+                  "birthDate": "2001-10-01",
+                  "status": "ACTIVE"
+                }
+          links: {}
         '400':
           description: Bad request
+          headers: {}
+          content: {}
+          links: {}
         '401':
           description: Access Denied
+          headers: {}
+          content: {}
+          links: {}
         '404':
           description: Not found
+          headers: {}
+          content: {}
+          links: {}
     delete:
       description: Use this method to delete a customer given its id
       operationId: deleteCustomer
-      consumes: []
       parameters:
         - name: customerId
           in: path
           description: id of the customer that is to be deleted
           required: true
-          type: string
+          allowEmptyValue: false
+          schema:
+            type: string
+            description: id of the customer that is to be deleted
+            readOnly: false
+            example: null
       responses:
         '204':
           description: OK
+          headers: {}
+          content: {}
+          links: {}
         '401':
           description: Access Denied
+          headers: {}
+          content: {}
+          links: {}
         '404':
           description: Not found
+          headers: {}
+          content: {}
+          links: {}
+    parameters: []
   /customers:
+    summary: /customers
     get:
       description: Use this method to list and filter customers
       operationId: getCustomers
-      consumes: []
-      produces:
-        - application/json
       parameters:
         - name: lastName
           in: query
           description: Use this parameter to filter on the last name
           required: false
-          type: string
+          allowEmptyValue: false
+          schema:
+            type: string
+            description: Use this parameter to filter on the last name
+            readOnly: false
+            example: null
         - name: firstName
           in: query
           description: Use this parameter to filter on the first name
           required: false
-          type: string
+          allowEmptyValue: false
+          schema:
+            type: string
+            description: Use this parameter to filter on the first name
+            readOnly: false
+            example: null
         - name: birthDateFrom
           in: query
           description: Use this parameter to filter on the birth date, all customers having a birth date less than this date will be omitted from results
           required: false
-          type: string
+          allowEmptyValue: false
+          schema:
+            type: string
+            description: Use this parameter to filter on the birth date, all customers having a birth date less than this date will be omitted from results
+            readOnly: false
+            example: null
         - name: birthDateTo
           in: query
           description: Use this parameter to filter on the birth date, all customers having a birth date greater than this date will be omitted from results
           required: false
-          type: string
+          allowEmptyValue: false
+          schema:
+            type: string
+            description: Use this parameter to filter on the birth date, all customers having a birth date greater than this date will be omitted from results
+            readOnly: false
+            example: null
         - name: status
           in: query
           description: Use this parameter to filter on the status
           required: false
-          type: string
+          allowEmptyValue: false
+          schema:
+            type: string
+            description: Use this parameter to filter on the status
+            readOnly: false
+            example: null
         - name: pageNumber
           in: query
           description: Use this parameter to paginate results
           required: false
-          type: integer
-          default: 1
-          minimum: 1
-          format: int64
+          allowEmptyValue: false
+          schema:
+            minimum: 1
+            type: integer
+            description: Use this parameter to paginate results
+            format: int64
+            readOnly: false
+            default: 1
+            example: null
         - name: pageSize
           in: query
           description: Use this parameter to set the number of customers returned by a single call
           required: false
-          type: integer
-          default: 100
-          maximum: 1000
-          format: int64
+          allowEmptyValue: false
+          schema:
+            maximum: 1000
+            type: integer
+            description: Use this parameter to set the number of customers returned by a single call
+            format: int64
+            readOnly: false
+            default: 100
+            example: null
       responses:
         '200':
           description: OK
-          schema:
-            $ref: '#/definitions/getCustomersResponse'
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getCustomersResponse'
+              example: |-
+                {
+                  "customers": [
+                    {
+                      "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+                      "lastName": "Lyndon",
+                      "firstName": "James",
+                      "birthDate": "2001-10-01",
+                      "status": "ACTIVE"
+                    }
+                  ]
+                }
+          links: {}
         '400':
           description: Bad request
+          headers: {}
+          content: {}
+          links: {}
         '401':
           description: Access Denied
+          headers: {}
+          content: {}
+          links: {}
     post:
       description: Use this method to create a new customer
       operationId: postCustomer
-      consumes:
-        - application/json
-      produces:
-        - application/json
-      parameters:
-        - in: body
-          name: body
-          required: false
-          schema:
-            $ref: '#/definitions/CustomerCanonical'
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerCanonical'
+            example: |-
+              {
+                "lastName": "Lyndon",
+                "firstName": "James",
+                "birthDate": "2001-10-01",
+                "status": "ACTIVE"
+              }
       responses:
         '201':
           description: Created
-          schema:
-            $ref: '#/definitions/postCustomerResponse'
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/postCustomerResponse'
+              example: |-
+                {
+                  "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+                  "lastName": "Lyndon",
+                  "firstName": "James",
+                  "birthDate": "2001-10-01",
+                  "status": "ACTIVE"
+                }
+          links: {}
         '400':
           description: Bad request
+          headers: {}
+          content: {}
+          links: {}
         '401':
           description: Access Denied
-definitions:
-  postCustomerResponse:
-    type: object
-    required:
-      - customer
-    properties:
-      customer:
-        $ref: '#/definitions/CustomerCanonical'
-  getCustomerResponse:
-    type: object
-    properties:
-      customer:
-        $ref: '#/definitions/CustomerCanonical'
-  getCustomersResponse:
-    type: object
-    required:
-      - customers
-    properties:
-      customers:
-        type: array
-        items:
-          $ref: '#/definitions/CustomerCanonical'
-  CustomerCanonical:
-    type: object
-    required:
-      - firstName
-      - lastName
-    properties:
-      birthDate:
-        type: string
-        format: date
-        description: Customer date of birth
-      firstName:
-        type: string
-        description: Customer first name
-        minLength: 1
-        maxLength: 100
-      id:
-        type: string
-        format: uuid
-        description: Customer identifier, generated by the server (do not send it in POST requests)
-      lastName:
-        type: string
-        description: Customer last name
-        minLength: 1
-        maxLength: 100
-      status:
-        type: string
-        description: Customer status
-        enum:
-          - ACTIVE
-          - INACTIVE
-        default: ACTIVE
-  putCustomerResponse:
-    type: object
-    required:
-      - customer
-    properties:
-      customer:
-        $ref: '#/definitions/CustomerCanonical'
+          headers: {}
+          content: {}
+          links: {}
+    parameters: []
+components:
+  schemas:
+    postCustomerResponse:
+      required:
+        - customer
+      type: object
+      properties:
+        customer:
+          $ref: '#/components/schemas/CustomerCanonical'
+      example: null
+    getCustomerResponse:
+      type: object
+      properties:
+        customer:
+          $ref: '#/components/schemas/CustomerCanonical'
+      example: null
+    getCustomersResponse:
+      required:
+        - customers
+      type: object
+      properties:
+        customers:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomerCanonical'
+          example: null
+      example: null
+    CustomerCanonical:
+      required:
+        - firstName
+        - lastName
+      type: object
+      properties:
+        firstName:
+          maxLength: 100
+          minLength: 1
+          type: string
+          description: Customer first name
+          example: null
+        lastName:
+          maxLength: 100
+          minLength: 1
+          type: string
+          description: Customer last name
+          example: null
+        id:
+          type: string
+          description: Customer identifier, generated by the server (do not send it in POST requests)
+          format: uuid
+          example: null
+        birthDate:
+          type: string
+          description: Customer date of birth
+          format: date
+          example: null
+        status:
+          type: string
+          description: Customer status
+          enum:
+            - ACTIVE
+            - INACTIVE
+          default: ACTIVE
+          example: null
+      example: null
+    putCustomerResponse:
+      required:
+        - customer
+      type: object
+      properties:
+        customer:
+          $ref: '#/components/schemas/CustomerCanonical'
+      example: null
+  responses: {}
+  parameters: {}
+  examples: {}
+  requestBodies: {}
+  headers: {}
+  links: {}
+  callbacks: {}
