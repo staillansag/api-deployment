@@ -9,13 +9,10 @@ if [ -z "$API_ID" ]; then
     exit 0
 fi
 
-RESPONSE=$(curl -s --location --request DELETE "${APIGW_URL}/apis/${API_ID}" \
+RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" --location --request DELETE "${APIGW_URL}/apis/${API_ID}" \
 -u ${APIGW_USERNAME}:${APIGW_PASSWORD})
 
-ERROR_DETAILS=$(echo $RESPONSE | jq -r '.errorDetails')
-
-if [ "$ERROR_DETAILS" != "null" ] ; then
-    echo "--- API deletion failed: $ERROR_DETAILS"
-    echo $RESPONSE
+if [ "$RESPONSE" != "204" ] ; then
+    echo "--- API deletion failed: $RESPONSE"
     exit 1
 fi
