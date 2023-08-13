@@ -1,12 +1,12 @@
 {
     "metadata": {
-        "specificationFile": "CustomersAPI_swagger.yaml",
+        "specificationFile": "CustomersAPI.yaml",
         "specificationType": "swagger",
         "name": "MyAPI",
         "version": "1.0",
         "description": "This is my API",
         "team": "australia",
-        "groups": ["Search"],
+        "groups": ["Life", "Motor", "Liability"],
         "tags": [],
         "maturityState": "Test",
         "scope": "OneAccountAuthorizationServer:pocapis"
