@@ -3,17 +3,25 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
-trigger:
-- main
+# trigger:
+# - main
 
 pool:
   vmImage: ubuntu-latest
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+variables:
+  - group: apim-variables
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+steps:
+
+- script: chmod u+x ./scripts/*.sh
+  displayName: 'Grant shell execution permissions'
+
+- script: ./scripts/01_CheckManifest.sh
+  displayName: 'Check manifest.json file'
+
+- script: ./scripts/11_CreateAPIDefinition.sh
+  displayName: 'Create API definition'
+  env:
+    APIGW_PASSWORD: $(APIGW_PASSWORD)
+
