@@ -74,19 +74,19 @@ echo
 
 # Then we update the default policy with the content of the enforcements template
 
-# json=$(curl -s --location --request GET "${APIGW_URL}/policies/${API_POLICY_ID}" \
-#     -u ${APIGW_USERNAME}:${APIGW_PASSWORD} \
-#     --header 'accept: application/json' | jq --slurpfile replacement tmp_enforcements.json '.policy.policyEnforcements = $replacement[0]')
+json=$(curl -s --location --request GET "${APIGW_URL}/policies/${API_POLICY_ID}" \
+    -u ${APIGW_USERNAME}:${APIGW_PASSWORD} \
+    --header 'accept: application/json' | jq --slurpfile replacement tmp_enforcements.json '.policy.policyEnforcements = $replacement[0]')
 
-# RESPONSE=$(curl -s --location --request PUT "${APIGW_URL}/policies/${API_POLICY_ID}" \
-# -u ${APIGW_USERNAME}:${APIGW_PASSWORD} \
-# --header 'accept: application/json' \
-# --header 'Content-Type: application/json' \
-# --data-raw "${json}")
+RESPONSE=$(curl -s --location --request PUT "${APIGW_URL}/policies/${API_POLICY_ID}" \
+-u ${APIGW_USERNAME}:${APIGW_PASSWORD} \
+--header 'accept: application/json' \
+--header 'Content-Type: application/json' \
+--data-raw "${json}")
 
-# ERROR_DETAILS=$(echo $RESPONSE | jq -r '.errorDetails')
+ERROR_DETAILS=$(echo $RESPONSE | jq -r '.errorDetails')
 
-# if [ "$ERROR_DETAILS" != "null" ] ; then
-#     echo "Policy update failed: $ERROR_DETAILS"
-#     exit 1
-# fi
+if [ "$ERROR_DETAILS" != "null" ] ; then
+    echo "Policy update failed: $ERROR_DETAILS"
+    exit 1
+fi
