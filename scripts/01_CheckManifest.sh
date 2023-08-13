@@ -44,6 +44,7 @@ fi
 # Checking policies. We need at least a transport policy and a routing policy
 
 array_length=$(jq '.transport | length' Meta.json)
+echo "array_length = ${array_length}"
 if [ "$array_length" -eq 0 ]; then
     echo "transport information missing"
     exit 1
