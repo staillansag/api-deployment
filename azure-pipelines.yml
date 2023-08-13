@@ -21,3 +21,7 @@ steps:
   env:
     APIGW_PASSWORD: $(APIGW_PASSWORD)
 
+- script: ./scripts/14_UpdateAPIMetadata.sh
+  displayName: 'Update API metadata'
+  env:
+    APIGW_PASSWORD: $(APIGW_PASSWORD)
