@@ -1,0 +1,80 @@
+{
+    "metadata": {
+        "specificationFile": "CustomersAPI_swagger.yaml",
+        "specificationType": "swagger",
+        "name": "MyAPI",
+        "version": "1.0",
+        "description": "This is my API",
+        "team": "australia",
+        "groups": ["Search"],
+        "tags": [],
+        "maturityState": "Test",
+        "scope": "OneAccountAuthorizationServer:pocapis"
+    },
+    "transport": [
+        "http",
+        "https"
+    ],
+    "iam": {
+        "logicalConnector": "OR",
+        "allowAnonymous": "false",
+        "conditions": [
+            {
+                "type": "httpsCertificate",
+                "applicationLookup": "open"
+            },
+            {
+                "type": "oAuth2Token",
+                "applicationLookup": "strict"
+            }
+        ]
+    },
+    "requestTransformations": [
+        {
+            "requestTransformationConfigurations": [
+                {
+                    "type": "addOrModify",
+                    "target": "${request.headers.Accept}",
+                    "value": "application/json"
+                },
+                {
+                    "type": "remove",
+                    "target": "${request.headers.Postman-Token}"
+                }
+            ]
+        }
+    ],
+    "requestValidation": {
+        "validatePayload": "true",
+        "validatePathParameters": "true",
+        "validateQueryParameters": "true",
+        "validateHeaders": "false",
+        "validateCookies": "false",
+        "validateContentType": "true"
+    },
+    "routing": {
+        "endpointUri": "${customers-be-url}/${sys:resource_path}",
+        "method": "CUSTOM"
+    },
+    "backendAuthentication": {
+        "authType": "ALIAS",
+        "alias": "customers-be-credentials"
+    },
+    "throttling": {
+        "limit": "10",
+        "alertInterval": "1",
+        "alertIntervalUnit": "minutes",
+        "alertFrequency": "once",
+        "alertMessage": "Maximum number of calls per minute exceeded",
+        "destinations": ["GATEWAY", "APIPORTAL", "ELASTICSEARCH"],
+        "consumers": ["AllConsumers"]
+    },
+    "caching": {
+        "ttl": "5m"
+    },
+    "responseValidation": {
+        "validatePayload": "true",
+        "validateHeaders": "false",
+        "validateContentType": "true"
+    }
+}
