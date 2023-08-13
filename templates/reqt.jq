@@ -23,7 +23,7 @@
           {
             "templateKey": "commonTransformation",
             "parameters": 
-            .requestTransformations[0].requestTransformationConfigurations | reduce .[] as $item ([]; 
+            (.requestTransformations[0].requestTransformationConfigurations | reduce .[] as $item ([]; 
               if $item.type == "addOrModify" then
                 . + [
                   {
@@ -50,7 +50,7 @@
               else
                 .
               end
-            )
+            ))
           }
         ]
       }
