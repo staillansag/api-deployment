@@ -5,7 +5,7 @@
         "name": "MyAPI",
         "version": "1.0",
         "description": "This is my API",
-        "team": "singapore",
+        "team": "australia",
         "groups": ["Life", "Motor", "Liability"],
         "tags": [],
         "maturityState": "Test",
