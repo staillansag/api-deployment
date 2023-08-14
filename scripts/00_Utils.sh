@@ -1,4 +1,5 @@
 echo "alias curl='curl -k'" >> ~/.bashrc && source ~/.bashrc
+cat ~/.bashrc
 
 createPolicyEnforcement() {
     local jq_file="$1"
