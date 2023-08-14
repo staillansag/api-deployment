@@ -21,6 +21,7 @@ jobs:
 
   - script: |
       echo "##vso[task.setvariable variable=TRUSTSTORE_PATH;isOutput=true]$(getTrustStore.secureFilePath)"
+      echo "Truststore path = $(getTrustStore.secureFilePath)"
     name: setTrustStorePath
 
   - script: chmod u+x ./scripts/*.sh
