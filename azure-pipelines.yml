@@ -19,10 +19,6 @@ jobs:
     inputs:
       secureFile: 'openpaas_truststore.crt'
 
-  - script: |
-      echo "Truststore path = $(trustStore.secureFilePath)"
-    name: setTrustStorePath
-
   - script: chmod u+x ./scripts/*.sh
     displayName: 'Grant shell execution permissions'
 
