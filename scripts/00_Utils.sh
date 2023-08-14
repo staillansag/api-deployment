@@ -1,6 +1,5 @@
-export CURL_CA_BUNDLE=${trustStore.secureFilePath}
+export CURL_CA_BUNDLE=${TRUSTSTORE_SECUREFILEPATH}
 echo "Curl trustStore set to ${CURL_CA_BUNDLE}"
-env
 
 createPolicyEnforcement() {
     local jq_file="$1"
