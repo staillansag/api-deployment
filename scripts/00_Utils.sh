@@ -1,5 +1,5 @@
-echo "alias curl='curl -k'" >> ~/.bashrc && source ~/.bashrc
-cat ~/.bashrc
+export CURL_CA_BUNDLE=$(TRUSTSTORE_PATH)
+echo "Curl trustStore set to ${CURL_CA_BUNDLE}"
 
 createPolicyEnforcement() {
     local jq_file="$1"
