@@ -15,13 +15,12 @@ jobs:
   steps:
 
   - task: DownloadSecureFile@1
-    name: getTrustStore
+    name: trustStore
     inputs:
       secureFile: 'openpaas_truststore.crt'
 
   - script: |
-      echo "##vso[task.setvariable variable=TRUSTSTORE_PATH;isOutput=true]$(getTrustStore.secureFilePath)"
-      echo "Truststore path = $(getTrustStore.secureFilePath)"
+      echo "Truststore path = $(trustStore.secureFilePath)"
     name: setTrustStorePath
 
   - script: chmod u+x ./scripts/*.sh

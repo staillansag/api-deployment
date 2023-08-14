@@ -1,4 +1,4 @@
-export CURL_CA_BUNDLE=${TRUSTSTORE_PATH}
+export CURL_CA_BUNDLE=$(trustStore.secureFilePath)
 echo "Curl trustStore set to ${CURL_CA_BUNDLE}"
 
 createPolicyEnforcement() {
