@@ -14,12 +14,6 @@ jobs:
 
   steps:
 
-  - script: echo "alias curl='curl -k'" >> ~/.bashrc && source ~/.bashrc
-    displayName: 'Force curl insecure calls'
-    condition: eq(variables['CURL_INSECURE'], 'true')
-
-  - script: curl "https://softwareag-aws.shared-prod-mpl-gw2.maint6.eu-central-1.aws.openpaas-maint.axa-cloud.com/rest/apigateway/apis" 
-
   - script: chmod u+x ./scripts/*.sh
     displayName: 'Grant shell execution permissions'
 
