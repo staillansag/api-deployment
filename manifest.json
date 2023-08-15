@@ -1,10 +1,10 @@
 {
     "metadata": {
         "specificationFile": "CustomersAPI.yaml",
-        "specificationType": "openapi",
-        "name": "MyAPI",
+        "specificationType": "swagger",
+        "name": "MySwaggerAPI",
         "version": "1.0",
-        "description": "This is my API",
+        "description": "This is my Swagger API",
         "team": "australia",
         "groups": ["Life", "Motor", "Liability"],
         "tags": [],
