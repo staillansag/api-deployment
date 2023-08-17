@@ -1,4 +1,4 @@
-if [[ ! -f "${TRUSTSTORE_SECUREFILEPATH}" ]]; then
+if [[ -f "${TRUSTSTORE_SECUREFILEPATH}" ]]; then
     export CURL_CA_BUNDLE=${TRUSTSTORE_SECUREFILEPATH}
     echo "Curl trustStore set to ${CURL_CA_BUNDLE}"
 fi
