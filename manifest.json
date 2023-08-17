@@ -52,12 +52,12 @@
         "validateContentType": "true"
     },
     "routing": {
-        "endpointUri": "${customers-be-url}/${sys:resource_path}",
+        "endpointUri": "${customers-be-url-alt}/${sys:resource_path}",
         "method": "CUSTOM"
     },
     "backendAuthentication": {
         "authType": "ALIAS",
-        "alias": "${customers-be-credentials}"
+        "alias": "${customers-be-credentials-alt}"
     },
     "throttling": {
         "limit": "10",
