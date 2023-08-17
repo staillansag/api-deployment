@@ -24,7 +24,7 @@ jobs:
     name: aliases
     displayName: 'Get aliases file'
     inputs:
-      secureFile: $ALIASES_FILE
+      secureFile: 'aliases.json'
 
   - script: chmod u+x ./scripts/*.sh
     displayName: 'Grant shell execution permissions'
