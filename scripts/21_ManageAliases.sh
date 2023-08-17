@@ -25,6 +25,8 @@ if [[ -f "${ALIASES_SECUREFILEPATH}" ]]; then
             echo "Creation of alias ${ALIAS_NAME} succeeded"
         else
             echo "Creation of alias ${ALIAS_NAME} failed: $ERROR_DETAILS"
+            echo "Submitted payload:"
+            echo $json
         fi
     done
 else
