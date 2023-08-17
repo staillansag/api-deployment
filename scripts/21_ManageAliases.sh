@@ -13,7 +13,7 @@ if [[ -f "${ALIASES_SECUREFILEPATH}" ]]; then
 
         ALIAS_NAME=$(echo "$json" | jq -r ".name")
 
-        RESPONSE=$(curl -s --location --request PUT "${APIGW_URL}/policies/${API_POLICY_ID}" \
+        RESPONSE=$(curl -s --location --request POST "${APIGW_URL}/alias" \
         -u ${APIGW_USERNAME}:${APIGW_PASSWORD} \
         --header 'accept: application/json' \
         --header 'Content-Type: application/json' \
