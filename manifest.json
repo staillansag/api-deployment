@@ -2,7 +2,7 @@
     "metadata": {
         "specificationFile": "CustomersAPI.yaml",
         "specificationType": "swagger",
-        "name": "MySwaggerAPI",
+        "name": "MyAPI",
         "version": "1.0",
         "description": "This is my Swagger API",
         "team": "australia",
