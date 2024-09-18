@@ -7,7 +7,7 @@
         }
     ],
     responseFields: [
-        "name",
+        "scopeName",
         "id"
     ],
     condition: "and"
