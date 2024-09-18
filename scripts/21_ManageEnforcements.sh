@@ -68,9 +68,9 @@ if jq -e 'has("responseValidation")' manifest.json > /dev/null; then
     createPolicyEnforcement "./templates/resv.jq" "manifest.json" "responseProcessing" "./tmp_enforcements.json"
 fi
 
-echo
-cat ./tmp_enforcements.json
-echo
+# echo
+# cat ./tmp_enforcements.json
+# echo
 
 # Then we update the default policy with the content of the enforcements template
 
@@ -78,7 +78,6 @@ json=$(curl -s --location --request GET "${APIGW_URL}/policies/${API_POLICY_ID}"
     -u ${APIGW_USERNAME}:${APIGW_PASSWORD} \
     --header 'accept: application/json' | jq --slurpfile replacement tmp_enforcements.json '.policy.policyEnforcements = $replacement[0]')
 
-echo $json
 
 RESPONSE=$(curl -s --location --request PUT "${APIGW_URL}/policies/${API_POLICY_ID}" \
 -u ${APIGW_USERNAME}:${APIGW_PASSWORD} \
