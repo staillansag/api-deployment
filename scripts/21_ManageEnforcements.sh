@@ -78,6 +78,8 @@ json=$(curl -s --location --request GET "${APIGW_URL}/policies/${API_POLICY_ID}"
     -u ${APIGW_USERNAME}:${APIGW_PASSWORD} \
     --header 'accept: application/json' | jq --slurpfile replacement tmp_enforcements.json '.policy.policyEnforcements = $replacement[0]')
 
+echo $json
+
 RESPONSE=$(curl -s --location --request PUT "${APIGW_URL}/policies/${API_POLICY_ID}" \
 -u ${APIGW_USERNAME}:${APIGW_PASSWORD} \
 --header 'accept: application/json' \
