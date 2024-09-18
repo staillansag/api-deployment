@@ -9,7 +9,7 @@
         "groups": ["Search"],
         "tags": ["Test"],
         "maturityState": "Test",
-        "scope": "local:demo"
+        "scope": "OktaServer:demo"
     },
     "transport": [
         "https"
