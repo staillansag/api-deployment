@@ -7,8 +7,8 @@
         "description": "This is my Swagger API",
         "team": "GreenTeam",
         "groups": ["Search"],
-        "tags": ["Some tag"],
-        "maturityState": "Experimental",
+        "tags": ["Other tag"],
+        "maturityState": "Beta",
         "scope": "local:demo"
     },
     "transport": [

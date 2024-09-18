@@ -56,8 +56,8 @@ jobs:
     env:
       APIGW_PASSWORD: $(APIGW_PASSWORD)
 
-  - script: ./scripts/99_DeleteAPI.sh
-    displayName: 'Delete API'
-    env:
-      APIGW_PASSWORD: $(APIGW_PASSWORD)
-    condition: failed()
+  # - script: ./scripts/99_DeleteAPI.sh
+  #   displayName: 'Delete API'
+  #   env:
+  #     APIGW_PASSWORD: $(APIGW_PASSWORD)
+  #   condition: failed()
