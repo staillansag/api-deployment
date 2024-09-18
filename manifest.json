@@ -34,7 +34,7 @@
         "alias": "${is-be-creds}"
     },
     "throttling": {
-        "limit": "10",
+        "limit": "20",
         "alertInterval": "1",
         "alertIntervalUnit": "minutes",
         "alertFrequency": "once",
