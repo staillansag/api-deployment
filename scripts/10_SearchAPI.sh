@@ -49,9 +49,7 @@ else
     echo "--- API found with ID: ${API_ID}"
     echo "##vso[task.setvariable variable=API_ID;]${API_ID}"
 
-    echo "RESPONSE: $RESPONSE"
-
-    API_POLICY_ID=$(echo $RESPONSE | jq -r '.apiResponse.api.policies[0]')
+    API_POLICY_ID=$(echo $RESPONSE | jq -r '.api[0].policies[0]')
     echo "--- API policy ID: ${API_POLICY_ID}"
     echo "##vso[task.setvariable variable=API_POLICY_ID;]${API_POLICY_ID}"
 
