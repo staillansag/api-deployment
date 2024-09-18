@@ -1,3 +1,8 @@
+if [ "$ACTION" != "CREATE" ] ; then
+    echo "--- API already exists, skipping creation step"
+    exit 0
+fi
+
 echo "APIGW_URL         = ${APIGW_URL}"
 echo "APIGW_USERNAME    = ${APIGW_USERNAME}"
 echo "SPEC_TYPE         = ${SPEC_TYPE}"
