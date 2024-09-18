@@ -4,6 +4,8 @@ echo "APIGW_URL         = ${APIGW_URL}"
 echo "APIGW_USERNAME    = ${APIGW_USERNAME}"
 
 if [[ -f "${ALIASES_SECUREFILEPATH}" ]]; then
+
+    cat "${ALIASES_SECUREFILEPATH}"
     json_array=$(<"${ALIASES_SECUREFILEPATH}")
 
     len=$(echo "$json_array" | jq 'length')
