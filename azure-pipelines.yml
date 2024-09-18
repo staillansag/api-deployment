@@ -42,10 +42,10 @@ jobs:
     env:
       APIGW_PASSWORD: $(APIGW_PASSWORD)
 
-  - script: ./scripts/20_ManageAliases.sh
-    displayName: 'Create aliases'
-    env:
-      APIGW_PASSWORD: $(APIGW_PASSWORD)
+  # - script: ./scripts/20_ManageAliases.sh
+  #   displayName: 'Create aliases'
+  #   env:
+  #     APIGW_PASSWORD: $(APIGW_PASSWORD)
 
   - script: ./scripts/21_ManageEnforcements.sh
     displayName: 'Update API policy enforcements'

@@ -14,20 +14,6 @@
     "transport": [
         "https"
     ],
-    "iam": {
-        "logicalConnector": "OR",
-        "allowAnonymous": "false",
-        "conditions": [
-            {
-                "type": "httpsCertificate",
-                "applicationLookup": "strict"
-            },
-            {
-                "type": "oAuth2Token",
-                "applicationLookup": "strict"
-            }
-        ]
-    },
     "requestTransformations": [
         {
             "requestTransformationConfigurations": [
@@ -35,29 +21,17 @@
                     "type": "addOrModify",
                     "target": "${request.headers.Accept}",
                     "value": "application/json"
-                },
-                {
-                    "type": "remove",
-                    "target": "${request.headers.Postman-Token}"
                 }
             ]
         }
     ],
-    "requestValidation": {
-        "validatePayload": "true",
-        "validatePathParameters": "true",
-        "validateQueryParameters": "true",
-        "validateHeaders": "false",
-        "validateCookies": "false",
-        "validateContentType": "true"
-    },
     "routing": {
-        "endpointUri": "${customers-be-url-alt}/${sys:resource_path}",
+        "endpointUri": "${is-be-endpoint}/customer-management/${sys:resource_path}",
         "method": "CUSTOM"
     },
     "backendAuthentication": {
         "authType": "ALIAS",
-        "alias": "${customers-be-credentials-alt}"
+        "alias": "${is-be-creds}"
     },
     "throttling": {
         "limit": "10",
@@ -67,8 +41,5 @@
         "alertMessage": "Maximum number of calls per minute exceeded",
         "destinations": ["GATEWAY", "APIPORTAL", "ELASTICSEARCH"],
         "consumers": ["AllConsumers"]
-    },
-    "caching": {
-        "ttl": "5m"
     }
 }
