@@ -5,10 +5,10 @@
         "name": "MyAPI",
         "version": "1.0",
         "description": "This is my Swagger API",
-        "team": "BlueTeam",
+        "team": "GreenTeam",
         "groups": ["Search"],
-        "tags": ["Test"],
-        "maturityState": "Test",
+        "tags": ["Some tag"],
+        "maturityState": "Experimental",
         "scope": "local:demo"
     },
     "transport": [
