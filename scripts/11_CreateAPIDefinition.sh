@@ -1,11 +1,10 @@
-. ./scripts/00_Utils.sh
-
 echo "APIGW_URL         = ${APIGW_URL}"
 echo "APIGW_USERNAME    = ${APIGW_USERNAME}"
 echo "SPEC_TYPE         = ${SPEC_TYPE}"
 echo "API_SPEC_FILE     = ${API_SPEC_FILE}"
 echo "API_NAME          = ${API_NAME}"
 echo "API_VERSION       = ${API_VERSION}"
+echo "ACTION            = ${ACTION}"
 
 RESPONSE=$(curl -s --location --request POST "${APIGW_URL}/apis" \
 -u ${APIGW_USERNAME}:${APIGW_PASSWORD} \

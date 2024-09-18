@@ -27,7 +27,7 @@ jobs:
     displayName: 'Check manifest.json file'
 
   - script: ./scripts/10_SearchAPI.sh
-    displayName: 'Create API definition'
+    displayName: 'Search API'
     env:
       APIGW_PASSWORD: $(APIGW_PASSWORD)
 
