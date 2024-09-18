@@ -5,7 +5,7 @@
         "name": "MyAPI",
         "version": "1.0",
         "description": "This is my Swagger API",
-        "team": "Default",
+        "team": "BlueTeam",
         "groups": ["Search"],
         "tags": ["Test"],
         "maturityState": "Test",
