@@ -27,6 +27,8 @@ if [ "$API_ID" == "null" ]; then
     --header 'Content-Type: application/json' \
     --data-raw "${json}")
 
+    echo "RESPONSE = $RESPONSE"
+
     ERROR_DETAILS=$(echo "$RESPONSE" | jq -r '.errorDetails')
     API_ID=$(echo "$RESPONSE" | jq -r '.api[0].id')
 
@@ -50,8 +52,9 @@ else
     echo "##vso[task.setvariable variable=API_ID;]${API_ID}"
 
     API_POLICY_ID=$(echo $RESPONSE | jq -r '.apiResponse.api.policies[0]')
+    echo "--- API policy ID: ${API_POLICY_ID}"
     echo "##vso[task.setvariable variable=API_POLICY_ID;]${API_POLICY_ID}"
-    
+
     echo "##vso[task.setvariable variable=ACTION;]UPDATE"
 fi
 
