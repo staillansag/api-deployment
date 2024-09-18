@@ -7,19 +7,13 @@ echo "API_SPEC_FILE     = ${API_SPEC_FILE}"
 echo "API_NAME          = ${API_NAME}"
 echo "API_VERSION       = ${API_VERSION}"
 
-CURL_RESPONSE=$(curl -s --location --request POST "${APIGW_URL}/apis" \
+RESPONSE=$(curl -s --location --request POST "${APIGW_URL}/apis" \
 -u ${APIGW_USERNAME}:${APIGW_PASSWORD} \
 --header 'accept: application/json' \
 --form "type=${SPEC_TYPE}" \
 --form "apiName=${API_NAME}" \
 --form "apiVersion=${API_VERSION}" \
---form "file=@${API_SPEC_FILE}")
-
-echo "CURL_RESPONSE = $CURL_RESPONSE"
-
-RESPONSE=$(echo $RESPONSE | jq 'del(.apiResponse.api.apiDefinition)')
-
-echo "RESPONSE = $RESPONSE"
+--form "file=@${API_SPEC_FILE}" | jq 'del(.apiResponse.api.apiDefinition)')
 
 ERROR_DETAILS=$(echo $RESPONSE | jq -r '.errorDetails')
 
