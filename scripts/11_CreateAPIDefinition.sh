@@ -61,7 +61,6 @@ json=$(jq -n --arg api_id "$API_ID" --arg team_id "$TEAM_ID" '{
         $api_id
     ],
     "newTeams": [
-        "Administrators",
         $team_id
     ]
 }')
