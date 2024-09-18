@@ -5,11 +5,11 @@
         "name": "MyAPI",
         "version": "1.0",
         "description": "This is my Swagger API",
-        "team": "australia",
-        "groups": ["Life", "Motor", "Liability"],
-        "tags": [],
+        "team": "Default",
+        "groups": ["Search"],
+        "tags": ["Test"],
         "maturityState": "Test",
-        "scope": "OneAccountAuthorizationServer:pocapis"
+        "scope": "local:demo"
     },
     "transport": [
         "https"
