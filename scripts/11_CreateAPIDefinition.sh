@@ -15,6 +15,8 @@ RESPONSE=$(curl -s --location --request POST "${APIGW_URL}/apis" \
 --form "apiVersion=${API_VERSION}" \
 --form "file=@${API_SPEC_FILE}" | jq 'del(.apiResponse.api.apiDefinition)')
 
+echo "RESPONSE = $RESPONSE"
+
 ERROR_DETAILS=$(echo $RESPONSE | jq -r '.errorDetails')
 
 if [ "$ERROR_DETAILS" != "null" ] ; then
