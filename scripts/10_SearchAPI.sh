@@ -1,4 +1,4 @@
-. ./scripts/01_SetVariables.sh
+. ./scripts/00_Utils.sh
 
 json=$(jq -f ./templates/searchapiversion.jq manifest.json)
 
@@ -38,6 +38,7 @@ if [ "$API_ID" == "null" ]; then
 
     if [ "$API_ID" == "null" ] ; then
         echo "--- API not found"
+        echo "##vso[task.setvariable variable=ACTION;]CREATE"
     else
         echo "--- API ${API_NAME} already exists with a different version than ${API_VERSION}"
         echo "--- Creation of new API version not yet supported"
@@ -46,6 +47,7 @@ if [ "$API_ID" == "null" ]; then
 
 else
     echo "--- API found with ID: ${API_ID}"
-    API_ID=""
+    echo "##vso[task.setvariable variable=API_ID;]${API_ID}"
+    echo "##vso[task.setvariable variable=ACTION;]UPDATE"
 fi
 
