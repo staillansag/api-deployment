@@ -13,7 +13,8 @@
     responseFields: [
         "apiName",
         "apiVersion",
-        "id"
+        "id",
+        "policies"
     ],
     condition: "and"
 }
