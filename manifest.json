@@ -8,7 +8,7 @@
         "team": "GreenTeam",
         "groups": ["Search"],
         "tags": ["Other tag"],
-        "maturityState": "Test",
+        "maturityState": "Beta",
         "scope": "local:demo"
     },
     "transport": [
