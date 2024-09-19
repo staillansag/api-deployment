@@ -13,6 +13,18 @@ echo "API_ID            = ${API_ID}"
 echo "API_POLICY_ID     = ${API_POLICY_ID}"
 echo "ACTION            = ${ACTION}"
 
+RESPONSE=$(curl -s --location --request PUT "${APIGW_URL}/apis/${API_ID}/deactivate" \
+-u ${APIGW_USERNAME}:${APIGW_PASSWORD} \
+--header 'accept: application/json')
+
+ERROR_DETAILS=$(echo $RESPONSE | jq -r '.errorDetails')
+
+if [ "$ERROR_DETAILS" != "null" ] ; then
+    echo "--- API deactivation failed: $ERROR_DETAILS"
+    echo ${RESPONSE}
+    exit 1
+fi
+
 RESPONSE=$(curl -s --location --request PUT "${APIGW_URL}/apis/${API_ID}" \
 -u ${APIGW_USERNAME}:${APIGW_PASSWORD} \
 --header 'accept: application/json' \

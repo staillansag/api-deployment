@@ -1,10 +1,5 @@
 . ./scripts/00_Utils.sh
 
-if [ "$ACTION" != "CREATE" ] ; then
-    echo "--- API already exists, not changing its status"
-    exit 0
-fi
-
 echo "APIGW_URL         = ${APIGW_URL}"
 echo "APIGW_USERNAME    = ${APIGW_USERNAME}"
 echo "API_ID            = ${API_ID}"
