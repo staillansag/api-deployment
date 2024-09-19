@@ -77,6 +77,4 @@ if [ "$ERROR_DETAILS" != "null" ] ; then
     exit 1
 fi
 
-echo "API_ID            = ${API_ID}"
-echo "API_POLICY_ID     = ${API_POLICY_ID}"
 echo "TEAM_ID           = ${TEAM_ID}"

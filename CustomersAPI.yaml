@@ -1,8 +1,8 @@
 swagger: '2.0'
 info:
-  description: Customer management API to showcase microservices implementation using the webMethods stack
-  version: '2.0'
-  title: CustomersAPISwagger
+  description: Customer management API
+  version: '1.0'
+  title: CustomersAPI
 consumes:
   - application/json
 produces:
@@ -18,7 +18,7 @@ paths:
       parameters:
         - name: customerId
           in: path
-          description: id of the customer that is to be retrieved
+          description: id of the customer
           required: true
           type: string
       responses:
