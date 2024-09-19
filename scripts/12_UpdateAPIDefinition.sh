@@ -13,7 +13,7 @@ echo "API_ID            = ${API_ID}"
 echo "API_POLICY_ID     = ${API_POLICY_ID}"
 echo "ACTION            = ${ACTION}"
 
-RESPONSE=$(curl -s --location --request POST "${APIGW_URL}/apis/${API_ID}" \
+RESPONSE=$(curl -s --location --request PUT "${APIGW_URL}/apis/${API_ID}" \
 -u ${APIGW_USERNAME}:${APIGW_PASSWORD} \
 --header 'accept: application/json' \
 --form "type=${SPEC_TYPE}" \
