@@ -10,7 +10,7 @@ produces:
 paths:
   /customers/{customerId}:
     get:
-      description: Use this method to retrieve a customer given its id
+      description: Use this method to retrieve a customer given its ID
       operationId: getCustomer
       consumes: []
       produces:
