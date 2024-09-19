@@ -2,7 +2,7 @@
     "metadata": {
         "specificationFile": "CustomersAPI.yaml",
         "specificationType": "swagger",
-        "name": "MyAPI",
+        "name": "CustomerManagementAPI",
         "version": "1.0",
         "description": "Customer Management API",
         "team": "GreenTeam",
