@@ -8,7 +8,7 @@ ENDPOINTS=$(curl -s --location --request GET "${APIGW_URL}/apis/${API_ID}" \
 -u ${APIGW_USERNAME}:${APIGW_PASSWORD} \
 --header 'accept: application/json' | jq '.apiResponse.gatewayEndPoints')
 
-if [ -z "$VAR" ]; then
+if [ -z "$ENDPOINTS" ]; then
   echo "--- No endpoints found for API"
   exit 1
 fi
