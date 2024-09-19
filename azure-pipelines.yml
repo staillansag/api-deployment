@@ -39,6 +39,11 @@ jobs:
     env:
       APIGW_PASSWORD: $(APIGW_PASSWORD)
 
+  - script: ./scripts/12_UpdateAPIDefinition.sh
+    displayName: 'Update API definition'
+    env:
+      APIGW_PASSWORD: $(APIGW_PASSWORD)
+
   - script: ./scripts/14_UpdateAPIMetadata.sh
     displayName: 'Update API metadata'
     env:
