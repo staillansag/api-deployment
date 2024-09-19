@@ -64,5 +64,6 @@ ERROR_DETAILS=$(echo "$RESPONSE" | jq -r '.errorDetails')
 if [ "$ERROR_DETAILS" != "null" ] ; then
     echo "--- API publish failed: $ERROR_DETAILS"
     echo $RESPONSE | jq
+    echo "Posted json: ${json}"
     exit 1
 fi
