@@ -9,7 +9,9 @@
         "groups": ["Search"],
         "tags": ["Other tag"],
         "maturityState": "Beta",
-        "scope": "local:demo"
+        "scope": "local:demo",
+        "developerPortal": "APIPortal",
+        "community": "Public Community"
     },
     "transport": [
         "https"
