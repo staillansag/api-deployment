@@ -51,3 +51,7 @@ jobs:
     env:
       APIGW_PASSWORD: $(APIGW_PASSWORD)
 
+  - script: ./scripts/40_Publish.sh
+    displayName: 'Publish API to dev portal'
+    env:
+      APIGW_PASSWORD: $(APIGW_PASSWORD)
